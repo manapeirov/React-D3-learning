@@ -4,6 +4,7 @@ import './App.css'
 import Circles from './components/Circles'
 import Line from './components/Line'
 import LineWithAxes from './components/LineWithAxes'
+import AnimatedBarChart from './components/AnimatedBarChart'
 import InteractiveBarChart from './components/InteractiveBarChart'
 
 
@@ -15,6 +16,7 @@ function App() {
       {/* <Circles/> */}
       {/* <Line/> */}
       {/* <LineWithAxes/> */}
+      {/* <AnimatedBarChart/> */}
       <InteractiveBarChart/>
     </Fragment>
   )

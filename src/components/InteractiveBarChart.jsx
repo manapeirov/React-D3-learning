@@ -1,25 +1,26 @@
 import React, { Fragment, useState, useEffect, useRef } from 'react'
-import { select, axisBottom, axisRight, scaleLinear, scaleBand } from 'd3'
+
+import { select, axisBottom, axisRight, scaleLinear, scaleBand, } from 'd3'
 
 const InteractiveBarChart = () => {
 
-    const [data, setData] = useState([25, 30, 45, 60, 20, 65, 75])
+    const [data, setData] = useState([25, 35, 45, 60, 20, 65, 75])
     const svgRef = useRef()
 
     useEffect(() => {
         const svg = select(svgRef.current)
 
         const xScale = scaleBand()
-            .domain(data.map((value, index) => index ))
+            .domain(data.map((value, index) => index))
             .range([0, 300])
             .padding(0.5)
         
         const yScale = scaleLinear()
             .domain([0, 150])
             .range([150, 0])
-
+        
         const colourScale = scaleLinear()
-            .domain([75, 113, 150])
+            .domain([75, 100, 150])
             .range(['green', 'orange', 'red'])
             .clamp(true)
 
@@ -31,9 +32,8 @@ const InteractiveBarChart = () => {
             .style('transform', 'translateY(150px)')
             .call(xAxis)
         
-        
         const yAxis = axisRight(yScale)
-
+        
         svg
             .select('.y-axis')
             .style('transform', 'translateX(300px)')
@@ -47,12 +47,30 @@ const InteractiveBarChart = () => {
             .style('transform', 'scale(1, -1)')
             .attr('x', (value, index) => xScale(index))
             .attr('y', -150)
-            .attr('width', xScale.bandwidth()) //in this case its 300/7 which is around 42. But if using padding() on the scale it will be different, in this case 20
+            .attr('width', xScale.bandwidth())
+            .on('mouseenter', (value, index) => {
+                svg
+                    .selectAll('.tooltip')
+                    .data([value])
+                    .join(enter => enter.append('text').attr('y', yScale(value) - 20 ))
+                    .attr('class', 'tooltip')
+                    .text(value)
+                    .attr('x', xScale(index) + xScale.bandwidth() / 2 )
+                    .attr('text-anchor', 'middle')
+                    .transition()
+                    .attr('y', yScale(value) - 8 )
+                    .attr('opacity', 1)
+            })
+            .on('mouseleave', () => {
+                svg
+                    .select('.tooltip')
+                    .remove()
+            })
             .transition()
             .attr('fill', colourScale)
             .attr('height', value => 150 - yScale(value))
-    }, [data])
 
+    }, [data])
 
     return (
         <Fragment>
@@ -63,10 +81,13 @@ const InteractiveBarChart = () => {
             <br/>
             <br/>
             <br/>
-            <button onClick={() => setData(data.map(value => value + 5 ))}>Update Data</button>
-            <button onClick={() => setData(data.filter(value => value < 35))}>Filter Data</button>
+            <button onClick={() => setData(data.map(value => value +5))}>Update Data</button>
+            <button onClick={() => setData(data.filter(value=> value < 35))}>Filter Data</button>
+            <button onClick={() => setData([...data, Math.floor(Math.random() * 100)])}>Add Data</button> 
+            {/* Math.Random generates a random number between 0 and 1 e.g 0.4356475, if you want to generate a number between 0 and 100 have to times by 100. If you dont want the decimal places and want a whole number, pass it into math.floor(), this ronuds down to nearest whole numb*/}
         </Fragment>
     )
+
 }
 
 export default InteractiveBarChart

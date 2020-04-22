@@ -11,6 +11,12 @@ button {
   width: 8rem;
   height: auto;
   margin-bottom: 0.3rem;
+  border: 0.5 px solid green;
+}
+
+button:hover{
+  /* border: 2px solid crimson; */
+  box-shadow: 0 0 5px green;
 }
 
 div {
