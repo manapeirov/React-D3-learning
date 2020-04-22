@@ -14,13 +14,13 @@ const Line = () => {
             .y((value => 150 - value))
             .curve(curveCardinal)
 
-        // svg
-        //     .selectAll('path')
-        //     .data([data])
-        //     .join('path')
-        //     .attr('d', value => myLine(value))
-        //     .attr('fill', 'none')
-        //     .attr('stroke', 'blue')
+        svg
+            .selectAll('path')
+            .data([data])
+            .join('path')
+            .attr('d', value => myLine(value))
+            .attr('fill', 'none')
+            .attr('stroke', 'blue')
     }, [data])
 
     return (
@@ -28,7 +28,7 @@ const Line = () => {
             <svg ref={svgRef}></svg>
             <br />
           <button onClick={() => setData(data.map(value => value + 5))}>Update Data</button>
-          <button onClick={() => setData(data.filter(value => value < 35 ))}>filter Data</button>
+          <button onClick={() => setData(data.filter(value => value < 35 ))}>Filter Data</button>
         </Fragment>
     )
 }
