@@ -4,6 +4,7 @@ import './App.css'
 import Circles from './components/Circles'
 import Line from './components/Line'
 import LineWithAxes from './components/LineWithAxes'
+import InteractiveBarChart from './components/InteractiveBarChart'
 
 
 
@@ -13,7 +14,8 @@ function App() {
     <Fragment>
       {/* <Circles/> */}
       {/* <Line/> */}
-      <LineWithAxes align='center'/>
+      {/* <LineWithAxes/> */}
+      <InteractiveBarChart/>
     </Fragment>
   )
 }
