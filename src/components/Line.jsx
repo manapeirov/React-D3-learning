@@ -14,13 +14,13 @@ const Line = () => {
             .y((value => 150 - value))
             .curve(curveCardinal)
 
-        svg
-            .selectAll('path')
-            .data([data])
-            .join('path')
-            .attr('d', value => myLine(value))
-            .attr('fill', 'none')
-            .attr('stroke', 'blue')
+        // svg
+        //     .selectAll('path')
+        //     .data([data])
+        //     .join('path')
+        //     .attr('d', value => myLine(value))
+        //     .attr('fill', 'none')
+        //     .attr('stroke', 'blue')
     }, [data])
 
     return (
@@ -32,6 +32,7 @@ const Line = () => {
         </Fragment>
     )
 }
+
 
 export default Line
 
