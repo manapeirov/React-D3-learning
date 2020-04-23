@@ -1,13 +1,15 @@
-import React, { Fragment, useState, useEffect, useRef } from 'react'
+import React, { Fragment, useEffect, useRef } from 'react'
 
 import { select, axisBottom, axisRight, scaleLinear, scaleBand, } from 'd3'
 
-const InteractiveBarChart = () => {
+const InteractiveBarChart = (props) => {
 
-    const [data, setData] = useState([25, 35, 45, 60, 20, 65, 75])
+    const { data } = props
+
     const svgRef = useRef()
 
     useEffect(() => {
+        
         const svg = select(svgRef.current)
 
         const xScale = scaleBand()
@@ -81,10 +83,6 @@ const InteractiveBarChart = () => {
             <br/>
             <br/>
             <br/>
-            <button onClick={() => setData(data.map(value => value +5))}>Update Data</button>
-            <button onClick={() => setData(data.filter(value=> value < 35))}>Filter Data</button>
-            <button onClick={() => setData([...data, Math.floor(Math.random() * 100)])}>Add Data</button> 
-            {/* Math.Random generates a random number between 0 and 1 e.g 0.4356475, if you want to generate a number between 0 and 100 have to times by 100. If you dont want the decimal places and want a whole number, pass it into math.floor(), this ronuds down to nearest whole numb*/}
         </Fragment>
     )
 

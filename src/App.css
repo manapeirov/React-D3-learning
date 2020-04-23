@@ -2,23 +2,29 @@ svg {
   background: #eee;
   overflow: visible;
   display: block;
-  margin: auto;
+  width: 100%; 
+  /* No longer using default dimensinos of svg width 100% instead of 300px */
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  height: 100vh;
+  /* vh is relative to 1% of the height of the viewport  */
+  padding: 0 50px; 
+  /* So that when the chart becomes responsive we can still see the y axis */
 }
 
 button {
   display: block;
-  margin: auto;
+  margin: 0 auto 5px;
   width: 8rem;
   height: auto;
-  margin-bottom: 0.3rem;
   border: 0.5 px solid green;
 }
 
 button:hover{
   /* border: 2px solid crimson; */
   box-shadow: 0 0 5px green;
-}
-
-div {
- padding-top: 2rem;
 }
