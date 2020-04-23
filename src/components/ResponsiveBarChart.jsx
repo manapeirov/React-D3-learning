@@ -1,33 +1,6 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef } from 'react'
 import { select, scaleBand, scaleLinear, axisBottom, axisRight  } from 'd3'
-import ResizeObserver from 'resize-observer-polyfill'; //polyfill for browsers which dont support ResizeObserver
-
-
-const useResizeObserver = ref => {
-
-    const [dimensions, setDimensions] = useState(null)
-
-    useEffect(() => {
-        const observeTarget = ref.current
-
-        const resizeObserver = new ResizeObserver(entries => {
-            // console.log(entries)
-            entries.forEach(entry => {
-                setDimensions(entry.contentRect)
-            })
-        })
-
-        resizeObserver.observe(observeTarget)
-         
-        // Return a clean up function for this useEffect hook.
-        // It will be called whenever the component that uses this resizeObserver hook gets removed or unmounted.
-        return () => {
-            resizeObserver.unobserve(observeTarget)
-        }
-    }, [ref])
-
-    return dimensions
-}
+import useResizeObserver from './useResizeObserver'
 
 const ResponsiveBarChart = ({ data }) => {
     
@@ -62,7 +35,7 @@ const ResponsiveBarChart = ({ data }) => {
         //     .select('.x-axis')
         //     .style('transform', `translateY(${dimensions.height}px)`)
         //     .call(xAxis)
-        
+
         //to dynamically append the <g> elements instead:
         svg
             .selectAll('.x-axis')
