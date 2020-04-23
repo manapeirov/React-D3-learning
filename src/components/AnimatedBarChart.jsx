@@ -1,9 +1,9 @@
-import React, { Fragment, useState, useEffect, useRef } from 'react'
+import React, { Fragment, useEffect, useRef } from 'react'
 import { select, axisBottom, axisRight, scaleLinear, scaleBand } from 'd3'
 
-const AnimatedBarChart = () => {
+const AnimatedBarChart = (props) => {
 
-    const [data, setData] = useState([25, 30, 45, 60, 20, 65, 75])
+    const { data } = props
     const svgRef = useRef()
 
     useEffect(() => {
@@ -63,8 +63,6 @@ const AnimatedBarChart = () => {
             <br/>
             <br/>
             <br/>
-            <button onClick={() => setData(data.map(value => value + 5 ))}>Update Data</button>
-            <button onClick={() => setData(data.filter(value => value < 35))}>Filter Data</button>
         </Fragment>
     )
 }

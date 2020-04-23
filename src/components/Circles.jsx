@@ -1,13 +1,14 @@
-import React, { useRef, useEffect, useState, Fragment } from 'react'
+import React, { useRef, useEffect, Fragment } from 'react'
 import { select } from 'd3'
 
 
 
-function Circles() {
+function Circles(props) {
 
-  const [data, setData] = useState([25, 30, 45, 60, 20])
+  const { data } = props
 
   const svgRef = useRef()
+
   useEffect(() => {
     const svg = select(svgRef.current)
     svg
@@ -24,11 +25,24 @@ function Circles() {
       <Fragment>
           <svg ref={svgRef}></svg>
           <br />
-          <button onClick={() => setData(data.map(value => value + 5))}>Update Data</button>
-          <button onClick={() => setData(data.filter(value => value < 35 ))}>filter Data</button>
       </Fragment>
   )
 
 }
 
 export default Circles
+
+
+//To draw svg circles using pure React: 
+
+// const data = [25, 30, 45, 60, 20]
+
+// function App() {
+//   return(
+//     <Fragment>
+//       <svg>
+//         {data.map(value => (<circle r={value} />))}
+//       </svg>
+//     </Fragment>
+//   )
+// }

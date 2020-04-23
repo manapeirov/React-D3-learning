@@ -1,10 +1,10 @@
-import React, { useEffect, useRef, Fragment, useState } from 'react'
+import React, { useEffect, useRef, Fragment } from 'react'
 import { select, line, curveCardinal, axisBottom, scaleLinear, axisRight } from 'd3'
 
 
-const LineWithAxes = () => {
+const LineWithAxes = (props) => {
 
-    const [data, setData] = useState([25, 30, 45, 60, 20, 65, 75])
+    const { data } = props
     const svgRef = useRef()
 
     useEffect(() => {
@@ -58,9 +58,6 @@ const LineWithAxes = () => {
             <br/>
             <br/>
             <br/>
-            <br/>
-          <button onClick={() => setData(data.map(value => value + 5))}>Update Data</button>
-          <button onClick={() => setData(data.filter(value => value < 35 ))}>filter Data</button>
         </Fragment>
     )
 }
