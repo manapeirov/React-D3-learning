@@ -1,65 +1,76 @@
 import React, {  useState, Fragment, useRef, useEffect } from 'react'
 import './App.css'
-import Timeline from './components/Timeline'
+import RunningBarChart from './components/RunningBarChart'
+import useInterval from './components/useInterval'
 
 
 function App() {
 
-  const [bbCharacterData, setBbCharacterData] = useState([])
-  const [bbEpisodeData, setBbEpisodeData] = useState([])
-  const [highlight, setHighlight] = useState()
- 
- 
-  
-  useEffect(() => {
-    const getBbCharacterData = async () => {
-        try {
-          const response = await fetch( 'https://www.breakingbadapi.com/api/characters?category=Breaking+Bad')
-          const characters = await response.json()
-  
-          console.warn(characters)
-          setBbCharacterData(characters)
-
-        } catch (error) {
-          console.log(error)
-        }
+  const [iteration, setIteration] = useState(0)
+  const [start, setStart] = useState(false)
+  const [data, setData] = useState([
+    {
+      name: "alpha",
+      value: 10,
+      color: '#f4efd3'
+    },
+    {
+      name: 'beta',
+      value: 15,
+      color: '#cccccc'
+    },
+    {
+      name: 'charlie',
+      value: 20,
+      color: '#c2b0c9'
+    },
+    {
+      name: 'delta',
+      value: 25,
+      color: '#9656a1'
+    },
+    {
+      name: 'echo',
+      value: 30,
+      color: '#fa697c'
+    },
+    {
+      name: 'foxtrot',
+      value: 35,
+      color: '#fcc169'
     }
+  ])
 
-    getBbCharacterData()
+  //sort data:
+  data.sort((a, b) => b.value - a.value)
 
-  }, [])
+  const getRandomIndex = array => Math.floor(Math.random() * array.length)
 
-  useEffect(() => {
-    fetch('https://www.breakingbadapi.com/api/episodes?series=Breaking+Bad')
-      .then(response => response.ok && response.json())
-      .then(episodes => {
-        console.warn(episodes)
-        setBbEpisodeData(episodes)
-      })
-      .catch(console.error) // This is short hand for:
-      // .catch(error => {
-      //   console.log(error)
-      // })
-  }, [])
-
-
+  useInterval(() => {
+    if (start) {
+      const randomIndex = getRandomIndex(data)
+      setData(
+        data.map((entry, index) => 
+          index === randomIndex
+            ? {
+              ...entry,
+              value: entry.value + 10
+              }
+            : entry
+          )
+      )
+      setIteration(iteration + 1)
+    }
+  }, 500)
   
   return (
     <Fragment>
-      <h1>Breaking Bad Timeline</h1>
-      <Timeline data={bbEpisodeData} highlight={highlight}/>
-
-      <h2>Select your character</h2>
-      <select
-        value={highlight}
-        onChange={event => setHighlight(event.target.value)}
-        >
-        <option>Select character</option>
-        {bbCharacterData.map(character => (
-          <option key={character.name}>{character.name}</option>
-        ))}
-      </select>
-      
+      <h1>Racing Bar Chart</h1>
+      <RunningBarChart data={data}/>
+      <button onClick={() => setStart(!start)}>
+        {start ? 'Stop the race' : 'Start the race!'}
+      </button>
+      <p>Iteration: {iteration}</p>
     </Fragment>
   )
 }
@@ -188,6 +199,82 @@ export default App
 //         width='300'
 //         height='150'
 //       />
+      
+//     </Fragment>
+//   )
+// }
+
+// export default App
+
+
+
+
+
+
+
+// Code for Timeline 
+
+// import React, {  useState, Fragment, useEffect } from 'react'
+// import './App.css'
+// import Timeline from './components/Timeline'
+
+
+// function App() {
+
+//   const [bbCharacterData, setBbCharacterData] = useState([])
+//   const [bbEpisodeData, setBbEpisodeData] = useState([])
+//   const [highlight, setHighlight] = useState()
+ 
+ 
+  
+//   useEffect(() => {
+//     const getBbCharacterData = async () => {
+//         try {
+//           const response = await fetch( 'https://www.breakingbadapi.com/api/characters?category=Breaking+Bad')
+//           const characters = await response.json()
+  
+//           console.warn(characters)
+//           setBbCharacterData(characters)
+
+//         } catch (error) {
+//           console.log(error)
+//         }
+//     }
+
+//     getBbCharacterData()
+
+//   }, [])
+
+//   useEffect(() => {
+//     fetch('https://www.breakingbadapi.com/api/episodes?series=Breaking+Bad')
+//       .then(response => response.ok && response.json())
+//       .then(episodes => {
+//         console.warn(episodes)
+//         setBbEpisodeData(episodes)
+//       })
+//       .catch(console.error) // This is short hand for:
+//       // .catch(error => {
+//       //   console.log(error)
+//       // })
+//   }, [])
+
+
+  
+//   return (
+//     <Fragment>
+//       <h1>Breaking Bad Timeline</h1>
+//       <Timeline data={bbEpisodeData} highlight={highlight}/>
+
+//       <h2>Select your character</h2>
+//       <select
+//         value={highlight}
+//         onChange={event => setHighlight(event.target.value)}
+//         >
+//         <option>Select character</option>
+//         {bbCharacterData.map(character => (
+//           <option key={character.name}>{character.name}</option>
+//         ))}
+//       </select>
       
 //     </Fragment>
 //   )
