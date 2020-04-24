@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react'
 import useResizeObserver from './useResizeObserver'
 import { select, scaleBand, scaleLinear, max  } from 'd3'
 
-const RunningBarChart = ({ data }) => {
+const RacingBarChart = ({ data }) => {
 
 
     const wrapper = useRef()
@@ -58,4 +58,4 @@ const RunningBarChart = ({ data }) => {
 
 }
 
-export default RunningBarChart
+export default RacingBarChart

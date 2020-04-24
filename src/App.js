@@ -1,6 +1,6 @@
 import React, {  useState, Fragment, useRef, useEffect } from 'react'
 import './App.css'
-import RunningBarChart from './components/RunningBarChart'
+import RacingBarChart from './components/RacingBarChart'
 import useInterval from './components/useInterval'
 
 
@@ -66,7 +66,7 @@ function App() {
   return (
     <Fragment>
       <h1>Racing Bar Chart</h1>
-      <RunningBarChart data={data}/>
+      <RacingBarChart data={data}/>
       <button onClick={() => setStart(!start)}>
         {start ? 'Stop the race' : 'Start the race!'}
       </button>
