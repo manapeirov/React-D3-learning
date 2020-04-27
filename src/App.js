@@ -1,76 +1,43 @@
-import React, {  useState, Fragment, useRef, useEffect } from 'react'
+import React, {  useState, Fragment } from 'react'
 import './App.css'
-import RacingBarChart from './components/RacingBarChart'
-import useInterval from './components/useInterval'
+import TreeChart from './components/TreeChart'
 
 
 function App() {
 
-  const [iteration, setIteration] = useState(0)
-  const [start, setStart] = useState(false)
-  const [data, setData] = useState([
-    {
-      name: "alpha",
-      value: 10,
-      color: '#f4efd3'
-    },
-    {
-      name: 'beta',
-      value: 15,
-      color: '#cccccc'
-    },
-    {
-      name: 'charlie',
-      value: 20,
-      color: '#c2b0c9'
-    },
-    {
-      name: 'delta',
-      value: 25,
-      color: '#9656a1'
-    },
-    {
-      name: 'echo',
-      value: 30,
-      color: '#fa697c'
-    },
-    {
-      name: 'foxtrot',
-      value: 35,
-      color: '#fcc169'
-    }
-  ])
+  const initialData = {
+    name: 'aziz',
+    children: [
+      {
+        name: 'Fatemeh',
+        children: [
+          {
+            name: 'Mona'
+          },
+          {
+            name: 'Mana'
+          },
+          {
+            name: 'Maryam'
+          }
+        ]
+      },
+      {
+        name: 'Farzaneh'
+      }
+    ]
+  }
 
-  //sort data:
-  data.sort((a, b) => b.value - a.value)
+  const [data, setData] = useState(initialData)
 
-  const getRandomIndex = array => Math.floor(Math.random() * array.length)
 
-  useInterval(() => {
-    if (start) {
-      const randomIndex = getRandomIndex(data)
-      setData(
-        data.map((entry, index) => 
-          index === randomIndex
-            ? {
-              ...entry,
-              value: entry.value + 10
-              }
-            : entry
-          )
-      )
-      setIteration(iteration + 1)
-    }
-  }, 500)
-  
   return (
     <Fragment>
-      <h1>Racing Bar Chart</h1>
-      <RacingBarChart data={data}/>
-      <button onClick={() => setStart(!start)}>
-        {start ? 'Stop the race' : 'Start the race!'}
+      <h1>Animated Tree Chart</h1>
+      <TreeChart data={data} />
+      <button onClick={() => setData(initialData.children[0])}>
+        Update Data 
       </button>
-      <p>Iteration: {iteration}</p>
     </Fragment>
   )
 }
@@ -83,7 +50,7 @@ export default App
 
 
 
-// Code for Circles, InteractiveBarChart, AnimatedBarChart, Line, LineWithAxes, ResponsiveBarChart
+// Circles, InteractiveBarChart, AnimatedBarChart, Line, LineWithAxes, ResponsiveBarChart
 
 // import React, {  useState, Fragment, useRef, useEffect } from 'react'
 // import './App.css'
@@ -136,7 +103,7 @@ export default App
 
 
 
-// Code for gauge chart
+// Gauge chart
 
 // import React, {  useState, Fragment, useRef, useEffect } from 'react'
 // import './App.css'
@@ -212,7 +179,7 @@ export default App
 
 
 
-// Code for Timeline 
+// Timeline 
 
 // import React, {  useState, Fragment, useEffect } from 'react'
 // import './App.css'
@@ -276,6 +243,97 @@ export default App
 //         ))}
 //       </select>
       
+//     </Fragment>
+//   )
+// }
+
+// export default App
+
+
+
+
+
+
+
+
+
+
+
+// // Racing Bar Char:
+
+// import React, {  useState, Fragment, useRef, useEffect } from 'react'
+// import './App.css'
+// import RacingBarChart from './components/RacingBarChart'
+// import useInterval from './components/useInterval'
+
+
+// function App() {
+
+//   const [iteration, setIteration] = useState(0)
+//   const [start, setStart] = useState(false)
+//   const [data, setData] = useState([
+//     {
+//       name: "alpha",
+//       value: 10,
+//       color: '#f4efd3'
+//     },
+//     {
+//       name: 'beta',
+//       value: 15,
+//       color: '#cccccc'
+//     },
+//     {
+//       name: 'charlie',
+//       value: 20,
+//       color: '#c2b0c9'
+//     },
+//     {
+//       name: 'delta',
+//       value: 25,
+//       color: '#9656a1'
+//     },
+//     {
+//       name: 'echo',
+//       value: 30,
+//       color: '#fa697c'
+//     },
+//     {
+//       name: 'foxtrot',
+//       value: 35,
+//       color: '#fcc169'
+//     }
+//   ])
+
+//   //sort data:
+//   data.sort((a, b) => b.value - a.value)
+
+//   const getRandomIndex = array => Math.floor(Math.random() * array.length)
+
+//   useInterval(() => {
+//     if (start) {
+//       const randomIndex = getRandomIndex(data)
+//       setData(
+//         data.map((entry, index) => 
+//           index === randomIndex
+//             ? {
+//               ...entry,
+//               value: entry.value + 10
+//               }
+//             : entry
+//           )
+//       )
+//       setIteration(iteration + 1)
+//     }
+//   }, 500)
+  
+//   return (
+//     <Fragment>
+//       <h1>Racing Bar Chart</h1>
+//       <RacingBarChart data={data}/>
+//       <button onClick={() => setStart(!start)}>
+//         {start ? 'Stop the race' : 'Start the race!'}
+//       </button>
+//       <p>Iteration: {iteration}</p>
 //     </Fragment>
 //   )
 // }
