@@ -1,11 +1,25 @@
 import React, {  useState, Fragment } from 'react'
 import './App.css'
+import GeoChart from './components/GeoChart'
+import data from './GeoChart.world.geo.json'
 
 
 function App() {
 
+  const [property, setProperty] = useState('pop_est')
   return (
     <Fragment>
+      <h2>World Map with d3-geo</h2>
+      <GeoChart data={data} property={property}/>
+      <h2>Select property to highlight</h2>
+      <select
+        value={property}
+        onChange={event => setProperty(event.target.value)}
+      >
+        <option value='pop_est'>Population</option>
+        <option value='name_len'>Name Length</option>
+        <option value='gdp_md_est'>GDP</option>
+      </select>
 
     </Fragment>
   )
