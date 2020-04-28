@@ -1,43 +1,12 @@
 import React, {  useState, Fragment } from 'react'
 import './App.css'
-import TreeChart from './components/TreeChart'
 
 
 function App() {
 
-  const initialData = {
-    name: 'aziz',
-    children: [
-      {
-        name: 'Fatemeh',
-        children: [
-          {
-            name: 'Mona'
-          },
-          {
-            name: 'Mana'
-          },
-          {
-            name: 'Maryam'
-          }
-        ]
-      },
-      {
-        name: 'Farzaneh'
-      }
-    ]
-  }
-
-  const [data, setData] = useState(initialData)
-
-
   return (
     <Fragment>
-      <h1>Animated Tree Chart</h1>
-      <TreeChart data={data} />
-      <button onClick={() => setData(initialData.children[0])}>
-        Update Data 
-      </button>
+
     </Fragment>
   )
 }
@@ -172,6 +141,10 @@ export default App
 // }
 
 // export default App
+
+
+
+
 
 
 
@@ -334,6 +307,125 @@ export default App
 //         {start ? 'Stop the race' : 'Start the race!'}
 //       </button>
 //       <p>Iteration: {iteration}</p>
+//     </Fragment>
+//   )
+// }
+
+// export default App
+
+
+
+
+
+
+
+
+
+
+
+
+
+// // Tree Chart 
+
+// import React, {  useState, Fragment } from 'react'
+// import './App.css'
+// import TreeChart from './components/TreeChart'
+
+
+// function App() {
+
+//   const initialData = {
+//     name: 'aziz',
+//     children: [
+//       {
+//         name: 'Fatemeh',
+//         children: [
+//           {
+//             name: 'Mona'
+//           },
+//           {
+//             name: 'Mana'
+//           },
+//           {
+//             name: 'Maryam'
+//           }
+//         ]
+//       },
+//       {
+//         name: 'Farzaneh'
+//       }
+//     ]
+//   }
+
+//   const [data, setData] = useState(initialData)
+
+
+//   return (
+//     <Fragment>
+//       <h1>Animated Tree Chart</h1>
+//       <TreeChart data={data} />
+//       <button onClick={() => setData(initialData.children[0])}>
+//         Update Data 
+//       </button>
+//     </Fragment>
+//   )
+// }
+
+// export default App
+
+
+
+
+
+
+
+
+
+
+// // Force Tree Chart and Tree Chart
+// import React, {  useState, Fragment } from 'react'
+// import './App.css'
+// import ForceTreeChart from './components/ForceLayout'
+// import TreeChart from './components/TreeChart'
+
+
+// function App() {
+
+//   const initialData = {
+//     name: 'aziz',
+//     children: [
+//       {
+//         name: 'Fatemeh',
+//         children: [
+//           {
+//             name: 'Mona'
+//           },
+//           {
+//             name: 'Mana'
+//           },
+//           {
+//             name: 'Maryam'
+//           }
+//         ]
+//       },
+//       {
+//         name: 'Farzaneh'
+//       }
+//     ]
+//   }
+
+//   const [data, setData] = useState(initialData)
+
+
+//   return (
+//     <Fragment>
+//       <h1>🪐D3 Force Layout</h1>
+//       <ForceTreeChart data={data} />
+//       <h1>Animated Tree Chart</h1>
+//       <TreeChart data={data}/>
+//       <button onClick={() => setData(initialData.children[0])}>
+//         Update Data 
+//       </button>
 //     </Fragment>
 //   )
 // }
