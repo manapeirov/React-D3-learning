@@ -1,11 +1,20 @@
+
 svg {
   background: white;
-  /* overflow: visible; */
+  overflow: visible;
   display: block;
-  width: 100%; 
-  height: 500px;
-  /* No longer using default dimensinos of svg width 100% instead of 300px */
+  margin: auto;
+  width: 100%;
+  height: 300px
 }
+
+/* for non-responsive components */
+/* svg {
+  background: #eee;
+  overflow: visible;
+  display: block;
+  margin: auto;
+} */
 
 svg .country:hover {
   stroke: black;
@@ -58,4 +67,12 @@ p {
 
 select {
   margin-bottom: 5rem;
+}
+
+small {
+  margin-bottom: 2rem;
+  margin-top: 1rem;
+  display: block;
+  text-align: center;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }

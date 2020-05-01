@@ -1,26 +1,81 @@
-import React, {  useState, Fragment } from 'react'
+//Brush Chart Part 2 
+import React, { useState, Fragment } from 'react'
 import './App.css'
-import GeoChart from './components/GeoChart'
-import data from './GeoChart.world.geo.json'
+import StackedBarChart from './components/StackedBarChart'
+
+
+const data = [
+  {
+    year: 1980,
+    '🥑': 10,
+    '🍌': 20,
+    '🍆': 30,
+  },
+  {
+    year: 1990,
+    '🥑': 20,
+    '🍌': 40,
+    '🍆': 60,
+  },
+  {
+    year: 2000,
+    '🥑': 30,
+    '🍌': 45,
+    '🍆': 80,
+  },
+  {
+    year: 2010,
+    '🥑': 40,
+    '🍌': 60,
+    '🍆': 100,
+  },
+  {
+    year: 2020,
+    '🥑': 50,
+    '🍌': 80,
+    '🍆': 120,
+  }
+]
+
+const allKeys = ['🥑','🍌','🍆']
+
+const colors = {
+  '🥑': 'green',
+  '🍌': 'orange',
+  '🍆': 'purple',
+}
 
 
 function App() {
+  
+  const [keys, setKeys] = useState(allKeys)
 
-  const [property, setProperty] = useState('pop_est')
   return (
     <Fragment>
-      <h2>World Map with d3-geo</h2>
-      <GeoChart data={data} property={property}/>
-      <h2>Select property to highlight</h2>
-      <select
-        value={property}
-        onChange={event => setProperty(event.target.value)}
-      >
-        <option value='pop_est'>Population</option>
-        <option value='name_len'>Name Length</option>
-        <option value='gdp_md_est'>GDP</option>
-      </select>
+      <h2>Stacked Bar Chart With D3</h2>
+      <StackedBarChart data={data} keys={keys} colors={colors} />
 
+      <div className='fields'>
+        {allKeys.map(key => (
+          <div key={key} className='field'>
+            <input
+              id={key}
+              type='checkbox'
+              checked={keys.includes(key)}
+              onChange={ event => {
+                if (event.target.checked) {
+                  setKeys(Array.from(new Set([...keys, key])))
+                } else {
+                  setKeys(keys.filter(_key => _key !== key))
+                }
+              }}
+            />
+            <label for={key} style={{ color: colors[key]}}>
+              {key}
+            </label>
+          </div>
+        ))}
+      </div>
     </Fragment>
   )
 }
@@ -33,7 +88,7 @@ export default App
 
 
 
-// Circles, InteractiveBarChart, AnimatedBarChart, Line, LineWithAxes, ResponsiveBarChart
+// // Circles, InteractiveBarChart, AnimatedBarChart, Line, LineWithAxes, ResponsiveBarChart
 
 // import React, {  useState, Fragment, useRef, useEffect } from 'react'
 // import './App.css'
@@ -57,7 +112,7 @@ export default App
 //       {/* <AnimatedBarChart data={data} /> */}
 //       {/* <InteractiveBarChart data={data} /> */}
 //       {/* <ResponsiveBarChart data={data}/> */}
-//       {/* <br/>
+//       <br/>
 //       <br/>
 //       <button onClick={() => setData(data.map(value => value +5))}>
 //         Update Data
@@ -67,7 +122,7 @@ export default App
 //       </button>
 //       <button onClick={() => setData([...data, Math.floor(Math.random() * 100)])}>
 //         Add Data
-//       </button>  */}
+//       </button> 
 //       {/* Math.Random generates a random number between 0 and 1 e.g 0.4356475, if you want to generate a number between 0 and 100 have to times by 100. If you dont want the decimal places and want a whole number, pass it into math.floor(), this ronuds down to nearest whole numb*/}
      
 //     </Fragment>
@@ -86,14 +141,14 @@ export default App
 
 
 
-// Gauge chart
+// // Gauge chart
 
 // import React, {  useState, Fragment, useRef, useEffect } from 'react'
 // import './App.css'
 // import ml5 from 'ml5'
 // import useInterval from './components/useInterval'
 
-// import ResponsiveBarChart from './components/ResponsiveBarChart'
+
 // import GaugeChart from './components/GaugeChart'
 
 
@@ -166,7 +221,7 @@ export default App
 
 
 
-// Timeline 
+// // Timeline 
 
 // import React, {  useState, Fragment, useEffect } from 'react'
 // import './App.css'
@@ -397,9 +452,10 @@ export default App
 
 
 // // Force Tree Chart and Tree Chart
+
 // import React, {  useState, Fragment } from 'react'
 // import './App.css'
-// import ForceTreeChart from './components/ForceLayout'
+// import ForceTreeChart from './components/ForceTreeChart'
 // import TreeChart from './components/TreeChart'
 
 
@@ -440,6 +496,120 @@ export default App
 //       <button onClick={() => setData(initialData.children[0])}>
 //         Update Data 
 //       </button>
+//     </Fragment>
+//   )
+// }
+
+// export default App
+
+
+
+
+
+
+
+
+
+// // Geo Chart
+
+// import React, {  useState, Fragment } from 'react'
+// import './App.css'
+// import GeoChart from './components/GeoChart'
+// import data from './GeoChart.world.geo.json'
+
+
+// function App() {
+
+//   const [property, setProperty] = useState('pop_est')
+//   return (
+//     <Fragment>
+//       <h2>World Map with d3-geo</h2>
+//       <GeoChart data={data} property={property}/>
+//       <h2>Select property to highlight</h2>
+//       <select
+//         value={property}
+//         onChange={event => setProperty(event.target.value)}
+//       >
+//         <option value='pop_est'>Population</option>
+//         <option value='name_len'>Name Length</option>
+//         <option value='gdp_md_est'>GDP</option>
+//       </select>
+
+//     </Fragment>
+//   )
+// }
+
+// export default App
+
+
+
+
+
+// // Brush Chart Part 1
+// import React, { Fragment, useState } from 'react'
+// import './App.css'
+// import BrushChart from './components/BrushChart'
+
+
+// function App() {
+
+//   const [data, setData] = useState([10, 25, 30, 40, 25, 60])
+//   const onAddDataClick = () => {
+//     setData([...data, Math.round(Math.random() * 100)])
+//   }
+//   return (
+//     <Fragment>
+//       <h2>Sub-selections with d3-brush</h2>
+
+//       <BrushChart data={data} />
+//       <button onClick={onAddDataClick}>
+//         Add Data
+//       </button>
+
+//     </Fragment>
+//   )
+// }
+
+// export default App
+
+
+
+
+
+
+
+
+
+
+
+
+// //Brush Chart Part 2 
+// import React, { useState, Fragment } from 'react'
+// import './App.css'
+
+// import BrushChartPartTwo from './components/BrushChartPartTwo'
+// import BrushChartChild from './components/BrushChartChild'
+
+
+// function App() {
+
+//   const [data, setData] =useState(
+//     Array.from({ length: 30 }).map(() => Math.round(Math.random() * 100 ))
+//   )
+
+//   const onAddDataClick = () => 
+//     setData([...data, Math.round(Math.random() * 100)])
+  
+//   return (
+//     <Fragment>
+//       <h2>Visually filtering data with d3-brush</h2>
+      
+//       <BrushChartPartTwo data={data}>
+//         {selection => <BrushChartChild data={data} selection={selection} />} 
+//         {/* {(selection) => <h1>Hello {selection.join(', ')}</h1>} */}
+//       </BrushChartPartTwo>
+
+//       <button onClick={onAddDataClick}>Add data</button>
 //     </Fragment>
 //   )
 // }
