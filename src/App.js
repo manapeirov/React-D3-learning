@@ -1,23 +1,81 @@
-import React, { Fragment, useState } from 'react'
+//Brush Chart Part 2 
+import React, { useState, Fragment } from 'react'
 import './App.css'
-import BrushChart from './components/BrushChart'
+import StackedBarChart from './components/StackedBarChart'
+
+
+const data = [
+  {
+    year: 1980,
+    '🥑': 10,
+    '🍌': 20,
+    '🍆': 30,
+  },
+  {
+    year: 1990,
+    '🥑': 20,
+    '🍌': 40,
+    '🍆': 60,
+  },
+  {
+    year: 2000,
+    '🥑': 30,
+    '🍌': 45,
+    '🍆': 80,
+  },
+  {
+    year: 2010,
+    '🥑': 40,
+    '🍌': 60,
+    '🍆': 100,
+  },
+  {
+    year: 2020,
+    '🥑': 50,
+    '🍌': 80,
+    '🍆': 120,
+  }
+]
+
+const allKeys = ['🥑','🍌','🍆']
+
+const colors = {
+  '🥑': 'green',
+  '🍌': 'orange',
+  '🍆': 'purple',
+}
 
 
 function App() {
+  
+  const [keys, setKeys] = useState(allKeys)
 
-  const [data, setData] = useState([10, 25, 30, 40, 25, 60])
-  const onAddDataClick = () => {
-    setData([...data, Math.round(Math.random() * 100)])
-  }
   return (
     <Fragment>
-      <h2>Sub-selections with d3-brush</h2>
+      <h2>Stacked Bar Chart With D3</h2>
+      <StackedBarChart data={data} keys={keys} colors={colors} />
 
-      <BrushChart data={data} />
-      <button onClick={onAddDataClick}>
-        Add Data
-      </button>
-
+      <div className='fields'>
+        {allKeys.map(key => (
+          <div key={key} className='field'>
+            <input
+              id={key}
+              type='checkbox'
+              checked={keys.includes(key)}
+              onChange={ event => {
+                if (event.target.checked) {
+                  setKeys(Array.from(new Set([...keys, key])))
+                } else {
+                  setKeys(keys.filter(_key => _key !== key))
+                }
+              }}
+            />
+            <label for={key} style={{ color: colors[key]}}>
+              {key}
+            </label>
+          </div>
+        ))}
+      </div>
     </Fragment>
   )
 }
@@ -477,6 +535,81 @@ export default App
 //         <option value='gdp_md_est'>GDP</option>
 //       </select>
 
+//     </Fragment>
+//   )
+// }
+
+// export default App
+
+
+
+
+
+// // Brush Chart Part 1
+// import React, { Fragment, useState } from 'react'
+// import './App.css'
+// import BrushChart from './components/BrushChart'
+
+
+// function App() {
+
+//   const [data, setData] = useState([10, 25, 30, 40, 25, 60])
+//   const onAddDataClick = () => {
+//     setData([...data, Math.round(Math.random() * 100)])
+//   }
+//   return (
+//     <Fragment>
+//       <h2>Sub-selections with d3-brush</h2>
+
+//       <BrushChart data={data} />
+//       <button onClick={onAddDataClick}>
+//         Add Data
+//       </button>
+
+//     </Fragment>
+//   )
+// }
+
+// export default App
+
+
+
+
+
+
+
+
+
+
+
+
+// //Brush Chart Part 2 
+// import React, { useState, Fragment } from 'react'
+// import './App.css'
+
+// import BrushChartPartTwo from './components/BrushChartPartTwo'
+// import BrushChartChild from './components/BrushChartChild'
+
+
+// function App() {
+
+//   const [data, setData] =useState(
+//     Array.from({ length: 30 }).map(() => Math.round(Math.random() * 100 ))
+//   )
+
+//   const onAddDataClick = () => 
+//     setData([...data, Math.round(Math.random() * 100)])
+  
+//   return (
+//     <Fragment>
+//       <h2>Visually filtering data with d3-brush</h2>
+      
+//       <BrushChartPartTwo data={data}>
+//         {selection => <BrushChartChild data={data} selection={selection} />} 
+//         {/* {(selection) => <h1>Hello {selection.join(', ')}</h1>} */}
+//       </BrushChartPartTwo>
+
+//       <button onClick={onAddDataClick}>Add data</button>
 //     </Fragment>
 //   )
 // }
