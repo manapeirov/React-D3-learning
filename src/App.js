@@ -1,10 +1,11 @@
-//Brush Chart Part 2 
+// Stacked Area Chart with Stacked Bar Chart
 import React, { useState, Fragment } from 'react'
 import './App.css'
 import StackedBarChart from './components/StackedBarChart'
+import StackedAreaChart from './components/StackedAreaChart'
 
 
-const data = [
+const initialData = [
   {
     year: 1980,
     '🥑': 10,
@@ -49,10 +50,12 @@ const colors = {
 function App() {
   
   const [keys, setKeys] = useState(allKeys)
+  const [data, setData] = useState(initialData)
 
   return (
     <Fragment>
       <h2>Stacked Bar Chart With D3</h2>
+      <StackedAreaChart data={data} keys={keys} colors={colors} />
       <StackedBarChart data={data} keys={keys} colors={colors} />
 
       <div className='fields'>
@@ -76,6 +79,22 @@ function App() {
           </div>
         ))}
       </div>
+      
+      <button
+        onClick={() =>
+          setData([
+            ...data,
+            {
+              year: Math.max(...data.map(d => d.year)) + 10,
+              '🥑': Math.round(Math.random() * 100),
+              '🍌': Math.round(Math.random() * 125),
+              '🍆': Math.round(Math.random() * 150)
+            }
+          ])
+        }
+      >
+        Add Data
+      </button>
     </Fragment>
   )
 }
@@ -545,6 +564,12 @@ export default App
 
 
 
+
+
+
+
+
+
 // // Brush Chart Part 1
 // import React, { Fragment, useState } from 'react'
 // import './App.css'
@@ -615,3 +640,103 @@ export default App
 // }
 
 // export default App
+
+
+
+
+
+
+
+
+
+
+
+
+
+// //StackedBarChart
+
+// import React, { useState, Fragment } from 'react'
+// import './App.css'
+// import StackedBarChart from './components/StackedBarChart'
+
+
+// const data = [
+//   {
+//     year: 1980,
+//     '🥑': 10,
+//     '🍌': 20,
+//     '🍆': 30,
+//   },
+//   {
+//     year: 1990,
+//     '🥑': 20,
+//     '🍌': 40,
+//     '🍆': 60,
+//   },
+//   {
+//     year: 2000,
+//     '🥑': 30,
+//     '🍌': 45,
+//     '🍆': 80,
+//   },
+//   {
+//     year: 2010,
+//     '🥑': 40,
+//     '🍌': 60,
+//     '🍆': 100,
+//   },
+//   {
+//     year: 2020,
+//     '🥑': 50,
+//     '🍌': 80,
+//     '🍆': 120,
+//   }
+// ]
+
+// const allKeys = ['🥑','🍌','🍆']
+
+// const colors = {
+//   '🥑': 'green',
+//   '🍌': 'orange',
+//   '🍆': 'purple',
+// }
+
+
+// function App() {
+  
+//   const [keys, setKeys] = useState(allKeys)
+
+//   return (
+//     <Fragment>
+//       <h2>Stacked Bar Chart With D3</h2>
+//       <StackedBarChart data={data} keys={keys} colors={colors} />
+
+//       <div className='fields'>
+//         {allKeys.map(key => (
+//           <div key={key} className='field'>
+//             <input
+//               id={key}
+//               type='checkbox'
+//               checked={keys.includes(key)}
+//               onChange={ event => {
+//                 if (event.target.checked) {
+//                   setKeys(Array.from(new Set([...keys, key])))
+//                 } else {
+//                   setKeys(keys.filter(_key => _key !== key))
+//                 }
+//               }}
+//             />
+//             <label for={key} style={{ color: colors[key]}}>
+//               {key}
+//             </label>
+//           </div>
+//         ))}
+//       </div>
+//     </Fragment>
+//   )
+// }
+
+// export default App
+
+
+

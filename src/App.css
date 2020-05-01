@@ -32,6 +32,19 @@ svg .country:hover {
   /* So that when the chart becomes responsive we can still see the y axis */
 }
 
+/* #root {
+  max-width: 600px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: center;
+  height: 100vh;
+  padding: 0 50px;
+  text-align: center;
+  box-sizing: border-box;
+} */
+
 button {
   display: block;
   margin: 0 auto 5px;
@@ -75,4 +88,18 @@ small {
   display: block;
   text-align: center;
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.fields {
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.field {
+  display: inline-block;
+  margin: 0 0.5em;
+}
+
+.field input {
+  margin-right: 0.5em;
 }
